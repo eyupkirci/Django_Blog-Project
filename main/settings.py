@@ -31,12 +31,14 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['https://eyups-blog-app.herokuapp.com/','localhost','127.0.0.1']
+# ALLOWED_HOSTS = ['https://eyups-blog-app.herokuapp.com/','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +53,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     
     # postgresql
-    'psycopg2'
+    # 'psycopg2'
 ]
 
 MIDDLEWARE = [
@@ -89,23 +91,23 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES={
-   'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME': 'blog-app',  #db propertiesden
-      'USER':'postgres',     #db propertiesden
-      'PASSWORD':config('PASSWORD'),  # postgresql password
-      'HOST':'localhost',   
-      'PORT':'5432',            
-   }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# DATABASES={
+#    'default':{
+#       'ENGINE':'django.db.backends.postgresql_psycopg2',
+#       'NAME': 'blog-app',  #db propertiesden
+#       'USER':'postgres',     #db propertiesden
+#       'PASSWORD':config('PASSWORD'),  # postgresql password
+#       'HOST':'localhost',   
+#       'PORT':'5432',            
+#    }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -148,6 +150,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
