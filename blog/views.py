@@ -121,7 +121,7 @@ def postadd(request): # ok
         obj = form.save(commit=False) # Return an object without saving to the DB
         obj.user = User.objects.get(pk=request.user.id)
 
-        if(form.is_valid()):
+        if form.is_valid():
             form.save()
             return redirect('profile')
             
